@@ -717,5 +717,15 @@ namespace PermutationProgram
                 }
             }
         }
+
+        static public void IsGroup(int[][] permutations)
+        {
+            bool isGroup = WithoutRepetition.IsGroup(permutations);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Is permutations are a group?- " + isGroup);
+            }
+        }
     }
 }

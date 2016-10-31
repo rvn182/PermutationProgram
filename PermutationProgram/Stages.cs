@@ -41,19 +41,32 @@ namespace PermutationProgram
         {
             if (!Parsing.CheckCommand(command)) throw new Exception("Bad format of command.");
             int countSpaces = Parsing.CountSpaces(command);
-            switch(countSpaces)
+            string[] words = Parsing.GroupByWords(command);
+            if (words.Length > 2&&words[0]=="is-group")
             {
-                case 0:
-                    Handle1WordCommand(command);
-                    break;
-                case 1:
-                    Handle2WordCommand(command);
-                    break;
-                case 2:
-                    Handle3WordCommand(command);
-                    break;
-                default:
-                    throw new Exception("Bad format of command.");
+                int[][] permutations = new int[words.Length - 1][];
+                for(int i=1;i<words.Length;i++)
+                {
+                    permutations[i - 1] = Parsing.ParsePermutation(words[i]);
+                }
+                Writing.IsGroup(permutations);
+            }
+            else
+            {
+                switch (countSpaces)
+                {
+                    case 0:
+                        Handle1WordCommand(command);
+                        break;
+                    case 1:
+                        Handle2WordCommand(command);
+                        break;
+                    case 2:
+                        Handle3WordCommand(command);
+                        break;
+                    default:
+                        throw new Exception("Bad format of command.");
+                }
             }
             WaitForTyping();
         }
