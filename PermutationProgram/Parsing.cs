@@ -98,7 +98,7 @@ namespace PermutationProgram
 
         public static int[] ParseVector(string permutation)
         {
-            if (permutation[0]!='{' && permutation[permutation.Length - 1] != '}') throw new Exception("Bad format of permutation.");
+            if (permutation[0]!='<' && permutation[permutation.Length - 1] != '>') throw new Exception("Bad format of permutation.");
 
             List<int> values = new List<int>();
             string contener = "";
@@ -257,7 +257,7 @@ namespace PermutationProgram
         static public int[] ParsePermutation(string permutation)
         {
             int[] returnedPermutation= {1,2 };
-            if (permutation[0] == '{')
+            if (permutation[0] == '<')
                 returnedPermutation = ParseVector(permutation);
             else if (permutation[0] == '(')
             {

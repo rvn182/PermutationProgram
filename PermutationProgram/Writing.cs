@@ -38,7 +38,7 @@ namespace PermutationProgram
             Console.WriteLine("- calculate <expression> - example of command: \"calculate (f*(1 2 4))^3=(4)*(1 3)(4)\" ");
             Console.WriteLine("- generate-with-type <type> - example of command: \"generate-with-type [1^3,2^1]\"");
             Console.WriteLine("- generate-with-order <order> <length of permutation>");
-            Console.WriteLine("\nExample of permutation in one-line notation: {1,2,3,7,6,5}");
+            Console.WriteLine("\nExample of permutation in one-line notation: <1,2,3,7,6,5>");
             Console.WriteLine("Example of permutation in cycle notation: (1 2 3)(9)");
         }
 
@@ -101,13 +101,13 @@ namespace PermutationProgram
 
         static void WriteVector(StreamWriter writer, int[] vector)
         {
-            Write(writer, "{");
+            Write(writer, "<");
             for (int j = 0; j < vector.Length; j++)
             {
                 Write(writer, vector[j]+"");
                 if (j != (vector.Length - 1)) Write(writer, ","); //żeby nie wstawiało przecinka po ostatnim elemencie
             }
-            Write(writer, "}");
+            Write(writer, ">");
         }
         /*
         static void WriteCycle(StreamWriter writer, int[][] permutation)
