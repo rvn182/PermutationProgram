@@ -20,7 +20,7 @@ namespace PermutationProgram
             Console.WriteLine("- generate-anti <number of permutation> - to generate permutations in anti-lexicographical way.");
             Console.WriteLine("- generate-me <number of permutation> - like \"generate\" command but this is more effective.");
             Console.WriteLine("- reverse <permutation to reverse one-line or cycle notation>");
-            Console.WriteLine("- folding <left side permutation> <right side permutation>");
+            Console.WriteLine("- composition <left side permutation> <right side permutation>");
             Console.WriteLine("- notations <permutation>");
             Console.WriteLine("- is-involution <permutation>");
             Console.WriteLine("- is-disorder <permutation>");
@@ -197,16 +197,16 @@ namespace PermutationProgram
             }
         }
 
-        static public void WriteFolding(int[] leftPermutation, int[] rightPermutation)
+        static public void WriteComposition(int[] leftPermutation, int[] rightPermutation)
         {
-            int[] resultPermutation = WithoutRepetition.FoldingPermutations(leftPermutation, rightPermutation);
+            int[] resultPermutation = WithoutRepetition.CompositionPermutation(leftPermutation, rightPermutation);
             int[][] resultPermutationCycle = WithoutRepetition.VectorToCycle(resultPermutation);
             int[][] leftPermutationCycle = WithoutRepetition.VectorToCycle(leftPermutation);
             int[][] rightPermutationCycle = WithoutRepetition.VectorToCycle(rightPermutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
-                WriteLine(writer, "Folding permutations:");
+                WriteLine(writer, "Composition permutations:");
                 WriteLine(writer);
                 WriteLine(writer, "Left Permutation:");
                 Write(writer, "One-line notation: ");

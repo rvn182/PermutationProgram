@@ -357,11 +357,11 @@ namespace PermutationProgram
                 int[][] returnedPermutationCycle;
                 int[] permutation1 = ParsePermutation(expressions[0]);
                 int[] permutation2 = ParsePermutation(expressions[1]);
-                returnedPermutation = WithoutRepetition.FoldingPermutations(permutation1, permutation2);
+                returnedPermutation = WithoutRepetition.CompositionPermutation(permutation1, permutation2);
                 for (int i = 2; i < expressions.Length; i++)
                 {
                     int[] permutation = ParsePermutation(expressions[i]);
-                    returnedPermutation = WithoutRepetition.FoldingPermutations(returnedPermutation, permutation);
+                    returnedPermutation = WithoutRepetition.CompositionPermutation(returnedPermutation, permutation);
                 }
                 returnedPermutationCycle = WithoutRepetition.VectorToCycle(returnedPermutation);
                 returnedExpression = CycleToString(returnedPermutationCycle);

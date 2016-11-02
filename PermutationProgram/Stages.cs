@@ -191,10 +191,10 @@ namespace PermutationProgram
             int[] permutation;
             switch(words[0])
             {
-                case "folding":
+                case "composition":
                     int[] leftPermutation = Parsing.ParsePermutation(words[1]);
                     int[] rightPermutation = Parsing.ParsePermutation(words[2]);
-                    Writing.WriteFolding(leftPermutation, rightPermutation);
+                    Writing.WriteComposition(leftPermutation, rightPermutation);
                     break;
                 case "power":
                     permutation = Parsing.ParsePermutation(words[1]);
