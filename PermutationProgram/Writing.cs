@@ -33,8 +33,8 @@ namespace PermutationProgram
             Console.WriteLine("- count-cycles <permutation>");
             Console.WriteLine("- count-even-cycles <permutation>");
             Console.WriteLine("- inversions <permutation>");
-            Console.WriteLine("- number-of-permutation <permutation>");
-            Console.WriteLine("- permutation-by-number <number of permutation> <number of elements>");
+            Console.WriteLine("- index-from-permutation <permutation>");
+            Console.WriteLine("- permutation-from-index <index of permutatation> <number of elements>");
             Console.WriteLine("- calculate <expression> - example of command: \"calculate (f*(1 2 4))^3=(4)*(1 3)(4)\" ");
             Console.WriteLine("- generate-with-type <type> - example of command: \"generate-with-type [1^3,2^1]\"");
             Console.WriteLine("- generate-with-order <order> <length of permutation>");
@@ -258,7 +258,7 @@ namespace PermutationProgram
             }
         }
 
-        static public void WriteRank(int[] permutation)
+        static public void WriteOrder(int[] permutation)
         {
             int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
@@ -586,14 +586,14 @@ namespace PermutationProgram
             }
         }
 
-        static public void WriteNumberOfPermutation(int[] permutation)
+        static public void WritePermutationIndexLO(int[] permutation) // LO- lexicographical order
         {
             int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            long number = WithoutRepetition.NumberOfPermutation(permutation);
+            long index = WithoutRepetition.PermutationIndexLO(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
-                WriteLine(writer, "Number of permutation");
+                WriteLine(writer, "Permutation index in lexicographical order: ");
                 WriteLine(writer);
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
@@ -602,20 +602,20 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                WriteLine(writer, "Number: "+number);
+                WriteLine(writer, "Index: "+index);
                 WriteLine(writer);
             }
         }
 
-        static public void WritePermutationByNumber(int number, int n)
+        static public void WritePermutationFromIndexLO(int number, int n) //LO - lexicographical order
         {
-            int[] permutation = WithoutRepetition.PermutationByNumber(number, n);
+            int[] permutation = WithoutRepetition.PermutationFromIndexLO(number, n);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
-                WriteLine(writer, "Permutation by number");
+                WriteLine(writer, "Permutation from index in lexicographical order: ");
                 WriteLine(writer);
-                WriteLine(writer, "Number of permutation: " + number);       
+                WriteLine(writer, "Index of permutation: " + number);       
                 WriteLine(writer, "Number of elements: " + n);
                 WriteLine(writer);
                 Write(writer, "Permutation: ");
@@ -680,19 +680,7 @@ namespace PermutationProgram
             }
         }
 
-        static public void WriteOrder(int[] permutation)
-        {
-            int order = WithoutRepetition.OrderOfPermutation(permutation);
-            using (StreamWriter writer = new StreamWriter("log.txt", true))
-            {
-                WriteDate(writer);
-                Write(writer, "Order of permutation: ");
-                WriteVector(writer, permutation);
-                WriteLine(writer);
-                WriteLine(writer, "Order: " + order);
-                WriteLine(writer); 
-            }
-        }
+
 
         static void WriteDate(StreamWriter writer)
         {

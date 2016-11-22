@@ -110,9 +110,9 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteNotations(permutation);
                     break;
-                case "rank":
+                case "order":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteRank(permutation);
+                    Writing.WriteOrder(permutation);
                     break;
                 case "type":
                     permutation = Parsing.ParsePermutation(words[1]);
@@ -162,19 +162,15 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteInversionCommand(permutation);
                     break;
-                case "number-of-permutation":
+                case "index-from-permutation":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteNumberOfPermutation(permutation);
+                    Writing.WritePermutationIndexLO(permutation);
                     break;
                 case "calculate":
                     Writing.WriteCalculate(words[1]);
                     break;
                 case "generate-with-type":
                     Writing.WriteGenerateWithType(words[1]);
-                    break;
-                case "order":
-                    permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteOrder(permutation);
                     break;
                 case "generate-anti":
                     Writing.GenerateAntilexicographical(words[1]);
@@ -201,10 +197,10 @@ namespace PermutationProgram
                     int power = int.Parse(words[2]);
                     Writing.WritePower(permutation, power);
                     break;
-                case "permutation-by-number":
+                case "permutation-from-index":
                     int number = int.Parse(words[1]);
                     int n = int.Parse(words[2]);
-                    Writing.WritePermutationByNumber(number, n);
+                    Writing.WritePermutationFromIndexLO(number, n);
                     break;
                 case "generate-with-order":
                     int order = int.Parse(words[1]);
