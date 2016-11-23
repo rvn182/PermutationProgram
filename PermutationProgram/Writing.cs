@@ -27,6 +27,10 @@ namespace PermutationProgram
             Console.WriteLine("- is-even <permutation>");
             Console.WriteLine("- is-non-even <permutation>");
             Console.WriteLine("- sign <permutation>");
+            Console.WriteLine("- sign1 <permutation> - (exponent - number of inversions)");
+            Console.WriteLine("- sign2 <permutation> - (exponent - (number of element - number of cycles))");
+            Console.WriteLine("- sign3 <permutation> - (exponent - (number of element + number of cycles))");
+            Console.WriteLine("- sign4 <permutation> - (exponent - number of even cycles)");
             Console.WriteLine("- is-tranposition <permutation>");
             Console.WriteLine("- power <permutation> <power>");
             Console.WriteLine("- inversion-vector <permutation>");
@@ -423,6 +427,90 @@ namespace PermutationProgram
                 WriteLine(writer);
                 Write(writer, "Value of sign: ");
                 Write(writer, WithoutRepetition.SignOfPermutation(permutation) + "");
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteSign1(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Sign of permutation");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Value of sign: ");
+                Write(writer, WithoutRepetition.SignOfPermutation1(permutation) + "");
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteSign2(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Sign of permutation");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Value of sign: ");
+                Write(writer, WithoutRepetition.SignOfPermutation2(permutation) + "");
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteSign3(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Sign of permutation");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Value of sign: ");
+                Write(writer, WithoutRepetition.SignOfPermutation3(permutation) + "");
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteSign4(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Sign of permutation");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Value of sign: ");
+                Write(writer, WithoutRepetition.SignOfPermutation4(permutation) + "");
                 WriteLine(writer);
             }
         }

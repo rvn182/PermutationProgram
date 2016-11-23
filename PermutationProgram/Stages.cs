@@ -138,6 +138,22 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteSign(permutation);
                     break;
+                case "sign1":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteSign1(permutation);
+                    break;
+                case "sign2":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteSign2(permutation);
+                    break;
+                case "sign3":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteSign3(permutation);
+                    break;
+                case "sign4":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteSign4(permutation);
+                    break;
                 case "is-transposition":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteIsTransposition(permutation);
