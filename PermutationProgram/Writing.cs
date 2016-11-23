@@ -33,8 +33,10 @@ namespace PermutationProgram
             Console.WriteLine("- count-cycles <permutation>");
             Console.WriteLine("- count-even-cycles <permutation>");
             Console.WriteLine("- inversions <permutation>");
-            Console.WriteLine("- index-from-permutation <permutation>");
-            Console.WriteLine("- permutation-from-index <index of permutatation> <number of elements>");
+            Console.WriteLine("- index-from-perm-lo <permutation> - lo - lexicographical order");
+            Console.WriteLine("- index-from-perm-lo <permutation> - alo - anti lexicographical order");
+            Console.WriteLine("- permutation-from-index-lo <index of permutatation in lexicographical order> <number of elements>");
+            Console.WriteLine("- permutation-from-index-alo <index of permutatation in anti lexicographical order> <number of elements>");
             Console.WriteLine("- calculate <expression> - example of command: \"calculate (f*(1 2 4))^3=(4)*(1 3)(4)\" ");
             Console.WriteLine("- generate-with-type <type> - example of command: \"generate-with-type [1^3,2^1]\"");
             Console.WriteLine("- generate-with-order <order> <length of permutation>");
@@ -607,6 +609,27 @@ namespace PermutationProgram
             }
         }
 
+        static public void WritePermutationIndexALO(int[] permutation) // ALO- anti lexicographical order
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            long index = WithoutRepetition.PermutationIndexALO(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Permutation index in anti lexicographical order: ");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                WriteLine(writer, "Index: " + index);
+                WriteLine(writer);
+            }
+        }
+
         static public void WritePermutationFromIndexLO(int number, int n) //LO - lexicographical order
         {
             int[] permutation = WithoutRepetition.PermutationFromIndexLO(number, n);
@@ -616,6 +639,23 @@ namespace PermutationProgram
                 WriteLine(writer, "Permutation from index in lexicographical order: ");
                 WriteLine(writer);
                 WriteLine(writer, "Index of permutation: " + number);       
+                WriteLine(writer, "Number of elements: " + n);
+                WriteLine(writer);
+                Write(writer, "Permutation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+            }
+        }
+
+        static public void WritePermutationFromIndexALO(int number, int n) //ALO - anti lexicographical order
+        {
+            int[] permutation = WithoutRepetition.PermutationFromIndexALO(number, n);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Permutation from index in anti lexicographical order: ");
+                WriteLine(writer);
+                WriteLine(writer, "Index of permutation: " + number);
                 WriteLine(writer, "Number of elements: " + n);
                 WriteLine(writer);
                 Write(writer, "Permutation: ");

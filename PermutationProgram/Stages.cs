@@ -162,9 +162,13 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteInversionCommand(permutation);
                     break;
-                case "index-from-permutation":
+                case "index-from-perm-lo":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WritePermutationIndexLO(permutation);
+                    break;
+                case "index-from-perm-alo":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WritePermutationIndexALO(permutation);
                     break;
                 case "calculate":
                     Writing.WriteCalculate(words[1]);
@@ -197,10 +201,15 @@ namespace PermutationProgram
                     int power = int.Parse(words[2]);
                     Writing.WritePower(permutation, power);
                     break;
-                case "permutation-from-index":
+                case "permutation-from-index-lo": //lexicographical order
                     int number = int.Parse(words[1]);
                     int n = int.Parse(words[2]);
                     Writing.WritePermutationFromIndexLO(number, n);
+                    break;
+                case "permutation-from-index-alo": //anti lexicographical order
+                    int numberALO = int.Parse(words[1]);
+                    int nALO = int.Parse(words[2]);
+                    Writing.WritePermutationFromIndexALO(numberALO, nALO);
                     break;
                 case "generate-with-order":
                     int order = int.Parse(words[1]);
