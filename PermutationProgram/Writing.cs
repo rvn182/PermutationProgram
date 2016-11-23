@@ -32,6 +32,8 @@ namespace PermutationProgram
             Console.WriteLine("- inversion-vector <permutation>");
             Console.WriteLine("- count-cycles <permutation>");
             Console.WriteLine("- count-even-cycles <permutation>");
+            Console.WriteLine("- count-non-even-cycles <permutation>");
+            Console.WriteLine("- count-fixed-points <permutation>");
             Console.WriteLine("- inversions <permutation>");
             Console.WriteLine("- index-from-perm-lo <permutation> - lo - lexicographical order");
             Console.WriteLine("- index-from-perm-lo <permutation> - alo - anti lexicographical order");
@@ -561,6 +563,46 @@ namespace PermutationProgram
                 WriteLine(writer);
                 WriteLine(writer);
                 Write(writer, "Number of even cycles: " + WithoutRepetition.CountEvenCycles(permutation));
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteCountNonEvenCycles(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Count non even cycles of permutation:");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Number of non even cycles: " + WithoutRepetition.CountNonEvenCycles(permutation));
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteCountFixedPoints(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Count fixed points of permutation:");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Number of fixed points " + WithoutRepetition.CountFixedPoints(permutation));
                 WriteLine(writer);
             }
         }

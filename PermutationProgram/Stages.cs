@@ -158,6 +158,14 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountEvenCycles(permutation);
                     break;
+                case "count-non-even-cycles":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCountNonEvenCycles(permutation);
+                    break;
+                case "count-fixed-points":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCountFixedPoints(permutation);
+                    break;
                 case "inversions":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteInversionCommand(permutation);
