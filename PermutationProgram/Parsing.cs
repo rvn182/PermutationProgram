@@ -274,8 +274,8 @@ namespace PermutationProgram
             string stringPermutation = "";
             for (int i = 0; i < permutation.Length; i++)
             {
-                if (permutation[i].Length > 1)
-                {
+                //if (permutation[i].Length > 1)
+               // {
                     stringPermutation += '(';
                     for (int j = 0; j < permutation[i].Length; j++)
                     {
@@ -286,10 +286,10 @@ namespace PermutationProgram
 
                     }
                     stringPermutation += ')';
-                }
+                //}
             }
-            int indexOfMax = Functions.LenghtArrayWithMax(permutation);
-            if (permutation[indexOfMax].Length == 1) stringPermutation += "(" + permutation[indexOfMax][0] + ")";
+            //int indexOfMax = Functions.LenghtArrayWithMax(permutation);
+            //if (permutation[indexOfMax].Length == 1) stringPermutation += "(" + permutation[indexOfMax][0] + ")";
             return stringPermutation;
         }
 

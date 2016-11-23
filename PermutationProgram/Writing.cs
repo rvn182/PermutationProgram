@@ -38,6 +38,8 @@ namespace PermutationProgram
             Console.WriteLine("- count-even-cycles <permutation>");
             Console.WriteLine("- count-non-even-cycles <permutation>");
             Console.WriteLine("- count-fixed-points <permutation>");
+            Console.WriteLine("- count-disorders <permutation>");
+            Console.WriteLine("- count-inversions <permutation>");
             Console.WriteLine("- inversions <permutation>");
             Console.WriteLine("- index-from-perm-lo <permutation> - lo - lexicographical order");
             Console.WriteLine("- index-from-perm-lo <permutation> - alo - anti lexicographical order");
@@ -190,7 +192,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -199,7 +201,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, reversePermutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cycleReversePermutation);
                 WriteLine(writer);
             }
@@ -220,7 +222,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, leftPermutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, leftPermutationCycle);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -228,7 +230,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, rightPermutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, rightPermutationCycle);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -236,7 +238,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, resultPermutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, resultPermutationCycle);
                 WriteLine(writer);
             }
@@ -255,7 +257,7 @@ namespace PermutationProgram
                 WriteVector(writer, permutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -277,7 +279,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -298,7 +300,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -325,7 +327,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -349,7 +351,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -373,7 +375,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -397,7 +399,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -421,7 +423,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -442,7 +444,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -463,7 +465,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -484,7 +486,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -505,7 +507,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -526,7 +528,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -552,7 +554,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer, "Power: " + power);
@@ -562,7 +564,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, resultPermutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, resultCyclePermutation);
                 WriteLine(writer);
             }
@@ -580,7 +582,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -605,7 +607,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -626,7 +628,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -646,7 +648,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -666,7 +668,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -686,11 +688,51 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
                 Write(writer, "Number of fixed points " + WithoutRepetition.CountFixedPoints(permutation));
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteCountDisorders(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Count disorders of permutation:");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Canonical cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Number of disorders " + WithoutRepetition.CountDisorders(permutation));
+                WriteLine(writer);
+            }
+        }
+
+        static public void WriteCountInversions(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, "Count inversions of permutation:");
+                WriteLine(writer);
+                Write(writer, "One-line notation: ");
+                WriteVector(writer, permutation);
+                WriteLine(writer);
+                Write(writer, "Canonical cycle notation: ");
+                WriteCycle(writer, cyclePermutation);
+                WriteLine(writer);
+                WriteLine(writer);
+                Write(writer, "Number of inversions " + WithoutRepetition.CountInversions(permutation));
                 WriteLine(writer);
             }
         }
@@ -707,7 +749,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -730,7 +772,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
@@ -751,7 +793,7 @@ namespace PermutationProgram
                 Write(writer, "One-line notation: ");
                 WriteVector(writer, permutation);
                 WriteLine(writer);
-                Write(writer, "Cycle notation: ");
+                Write(writer, "Canonical cycle notation: ");
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);

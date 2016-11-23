@@ -182,6 +182,14 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountFixedPoints(permutation);
                     break;
+                case "count-disorders":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCountDisorders(permutation);
+                    break;
+                case "count-inversions":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCountFixedPoints(permutation);
+                    break;
                 case "inversions":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteInversionCommand(permutation);
