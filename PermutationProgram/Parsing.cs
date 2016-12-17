@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Permutations;
 
 namespace PermutationProgram
@@ -262,7 +259,7 @@ namespace PermutationProgram
             else if (permutation[0] == '(')
             {
                 int[][] cyclePermutation = ParseCycle(permutation);
-                returnedPermutation = WithoutRepetition.CycleToVector(cyclePermutation);
+                returnedPermutation = WithoutRepetition.CycleToPermutation(cyclePermutation);
             }
             else
                 throw new Exception("Bad format of permutation.");
@@ -293,6 +290,17 @@ namespace PermutationProgram
             return stringPermutation;
         }
 
+        static public string CycleToTransposition(int[][] permutation)
+        {
+            string stringTransposition = "";
+            for(int i=0; i<permutation.Length;i++)
+                if(permutation[i].Length==2)
+                {
+                    stringTransposition = "(" + permutation[i][0] + " " + permutation[i][1] + ")";
+                }
+            return stringTransposition;
+        }
+
         public static string PowerOfPermutationString(string Expression)
         {
             int index = Expression.IndexOf("^");
@@ -302,7 +310,7 @@ namespace PermutationProgram
             string cyclePermutationString = Expression.Remove(index);
             int[] permutation = ParsePermutation(cyclePermutationString);
             int[] resultPermutation = WithoutRepetition.PowerOfPermutation(permutation, power);
-            int[][] resultPermutationCycle = WithoutRepetition.VectorToCycle(resultPermutation);
+            int[][] resultPermutationCycle = WithoutRepetition.PermutationToCycle(resultPermutation);
             string resultPermutationString = CycleToString(resultPermutationCycle);
 
             return resultPermutationString;
@@ -357,13 +365,13 @@ namespace PermutationProgram
                 int[][] returnedPermutationCycle;
                 int[] permutation1 = ParsePermutation(expressions[0]);
                 int[] permutation2 = ParsePermutation(expressions[1]);
-                returnedPermutation = WithoutRepetition.CompositionPermutation(permutation1, permutation2);
+                returnedPermutation = WithoutRepetition.CompositionOfPermutation(permutation1, permutation2);
                 for (int i = 2; i < expressions.Length; i++)
                 {
                     int[] permutation = ParsePermutation(expressions[i]);
-                    returnedPermutation = WithoutRepetition.CompositionPermutation(returnedPermutation, permutation);
+                    returnedPermutation = WithoutRepetition.CompositionOfPermutation(returnedPermutation, permutation);
                 }
-                returnedPermutationCycle = WithoutRepetition.VectorToCycle(returnedPermutation);
+                returnedPermutationCycle = WithoutRepetition.PermutationToCycle(returnedPermutation);
                 returnedExpression = CycleToString(returnedPermutationCycle);
             }
             else
@@ -436,6 +444,7 @@ namespace PermutationProgram
         {
             string[] expressions = Expression.Split('='); //podzielenie na strone prawą i lewą
             string rightOfExpression = "", leftOfExpression = "";
+            string toReturn = "";
             Exception exception = new Exception("Bad format of expression.");
             if (expressions.Length != 2)
                 throw exception;
@@ -545,17 +554,36 @@ namespace PermutationProgram
             }
             //Console.WriteLine("Right: " + rightOfExpression);
             rightOfExpression = CalculateExpression(rightOfExpression);
-            if(leftOfExpression.Contains("^"))
+            
+            if (leftOfExpression.Contains("^"))
             {
                 int i = leftOfExpression.IndexOf('^');
                 string toParse = leftOfExpression.Substring(i + 1);
                 int root = int.Parse(toParse);
                 int[] permutationToRoot = ParsePermutation(rightOfExpression);
-                int[] permutation = WithoutRepetition.RootOfPermutation(permutationToRoot, root);
-                int[][] permutationCycle = WithoutRepetition.VectorToCycle(permutation);
-                rightOfExpression = CycleToString(permutationCycle);
+                int[][] Cases = WithoutRepetition.RootOfPermutation(permutationToRoot, root);
+                if (Cases.Length == 0)
+                    toReturn += "There isn't any solutions of expression.";
+                else
+                {
+                    int[][] permutationCycle = WithoutRepetition.PermutationToCycle(Cases[0]);
+                    toReturn += "f=" + CycleToString(permutationCycle);
+                    if(Cases.Length>1)
+                    {
+                        for(int k=1;k<Cases.Length;k++)
+                        {
+                            permutationCycle = WithoutRepetition.PermutationToCycle(Cases[k]);
+                            toReturn+="||f="+ CycleToString(permutationCycle);
+                        }
+                    }
+                }
+                /*
+                int[][] permutationCycle = WithoutRepetition.PermutationToCycle(Cases);
+                rightOfExpression = CycleToString(permutationCycle);*/
             }
-            return "f=" + rightOfExpression;
+
+            return toReturn;
+            //return "f=" + rightOfExpression;
         }
 
         static int SearchIndexPower(string expression)

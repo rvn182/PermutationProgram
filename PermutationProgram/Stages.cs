@@ -51,6 +51,15 @@ namespace PermutationProgram
                 }
                 Writing.IsGroup(permutations);
             }
+            else if (words.Length > 2 && words[0] == "is-group-prove")
+            {
+                int[][] permutations = new int[words.Length - 1][];
+                for (int i = 1; i < words.Length; i++)
+                {
+                    permutations[i - 1] = Parsing.ParsePermutation(words[i]);
+                }
+                Writing.IsGroupProve(permutations);
+            }
             else
             {
                 switch (countSpaces)
@@ -99,9 +108,10 @@ namespace PermutationProgram
                 case "generate":
                     Writing.GeneratePermutations(words[1]);
                     break;
+                    /*
                 case "generate-me":
                     Writing.GeneratePermutationsME(words[1]);
-                    break;
+                    break;*/
                 case "reverse":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteReverse(permutation);
@@ -133,10 +143,6 @@ namespace PermutationProgram
                 case "is-non-even":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteIsNonEven(permutation);
-                    break;
-                case "sign":
-                    permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteSign(permutation);
                     break;
                 case "sign1":
                     permutation = Parsing.ParsePermutation(words[1]);
@@ -181,11 +187,11 @@ namespace PermutationProgram
                 case "count-fixed-points":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountFixedPoints(permutation);
-                    break;
+                    break;/*
                 case "count-disorders":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountDisorders(permutation);
-                    break;
+                    break;*/
                 case "count-inversions":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountFixedPoints(permutation);
@@ -210,6 +216,22 @@ namespace PermutationProgram
                     break;
                 case "generate-anti":
                     Writing.GenerateAntilexicographical(words[1]);
+                    break;
+                case "composition-of-transpositions-1":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCompositionOfTranposition1(permutation);
+                    break;
+                case "composition-of-transpositions-2":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCompositionOfTranposition2(permutation);
+                    break;
+                case "composition-of-neigh-trans-1":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCompositionOfNeighbouringTranposition1(permutation);
+                    break;
+                case "composition-of-neigh-trans-2":
+                    permutation = Parsing.ParsePermutation(words[1]);
+                    Writing.WriteCompositionOfNeighbouringTranposition2(permutation);
                     break;
                 default:
                     throw new Exception("Bad format of command.");

@@ -16,17 +16,18 @@ namespace PermutationProgram
             Console.WriteLine("- help - to see list of commands.");
             Console.WriteLine("- quit - to quit the program.");
             Console.WriteLine("- clear-log - to clear a log file.");
-            Console.WriteLine("- generate <number of permutation> - to generate permutations in lexicographical way.");
-            Console.WriteLine("- generate-anti <number of permutation> - to generate permutations in anti-lexicographical way.");
-            Console.WriteLine("- generate-me <number of permutation> - like \"generate\" command but this is more effective.");
+            Console.WriteLine("- notations <permutation>");
             Console.WriteLine("- reverse <permutation to reverse one-line or cycle notation>");
             Console.WriteLine("- composition <left side permutation> <right side permutation>");
-            Console.WriteLine("- notations <permutation>");
+            
+            //Console.WriteLine("- generate-me <number of permutation> - like \"generate\" command but this is more effective.");
+            
+            
+            
             Console.WriteLine("- is-involution <permutation>");
             Console.WriteLine("- is-disorder <permutation>");
             Console.WriteLine("- is-even <permutation>");
             Console.WriteLine("- is-non-even <permutation>");
-            Console.WriteLine("- sign <permutation>");
             Console.WriteLine("- sign1 <permutation> - (exponent - number of inversions)");
             Console.WriteLine("- sign2 <permutation> - (exponent - (number of element - number of cycles))");
             Console.WriteLine("- sign3 <permutation> - (exponent - (number of element + number of cycles))");
@@ -38,7 +39,7 @@ namespace PermutationProgram
             Console.WriteLine("- count-even-cycles <permutation>");
             Console.WriteLine("- count-non-even-cycles <permutation>");
             Console.WriteLine("- count-fixed-points <permutation>");
-            Console.WriteLine("- count-disorders <permutation>");
+            //Console.WriteLine("- count-disorders <permutation>");
             Console.WriteLine("- count-inversions <permutation>");
             Console.WriteLine("- inversions <permutation>");
             Console.WriteLine("- index-from-perm-lo <permutation> - lo - lexicographical order");
@@ -46,8 +47,15 @@ namespace PermutationProgram
             Console.WriteLine("- permutation-from-index-lo <index of permutatation in lexicographical order> <number of elements>");
             Console.WriteLine("- permutation-from-index-alo <index of permutatation in anti lexicographical order> <number of elements>");
             Console.WriteLine("- calculate <expression> - example of command: \"calculate (f*(1 2 4))^3=(4)*(1 3)(4)\" ");
+            Console.WriteLine("- generate <number of permutation> - to generate permutations in lexicographical way.");
+            Console.WriteLine("- generate-anti <number of permutation> - to generate permutations in anti-lexicographical way.");
             Console.WriteLine("- generate-with-type <type> - example of command: \"generate-with-type [1^3,2^1]\"");
             Console.WriteLine("- generate-with-order <order> <length of permutation>");
+            Console.WriteLine("- composition-of-transpositions-1 <permutation>");
+            Console.WriteLine("- composition-of-transpositions-2 <permutation>");
+            //composition-of-neigh-trans-1
+            Console.WriteLine("- composition-of-neigh-trans-1 <permutation>");
+            Console.WriteLine("- composition-of-neigh-trans-2 <permutation>");
             Console.WriteLine("\nExample of permutation in one-line notation: <1,2,3,7,6,5>");
             Console.WriteLine("Example of permutation in cycle notation: (1 2 3)(9)");
         }
@@ -59,7 +67,7 @@ namespace PermutationProgram
             {
                 WriteDate(writer);
                 WriteLine(writer, "Generating permutations...");
-                int[][] permutations = WithoutRepetition.PermutationLexicographical(numberInt);
+                int[][] permutations = WithoutRepetition.AllPermutationsInLexOrder(numberInt);
                 for (int i = 0; i < permutations.Length; i++)
                 {
                     Write(writer, (i + 1) + ") ");
@@ -86,7 +94,7 @@ namespace PermutationProgram
             writer.Write(text);
             Console.Write(text);
         }
-
+        /*
         static public void GeneratePermutationsME(string number)
         {
             int numberInt = int.Parse(number);
@@ -107,7 +115,7 @@ namespace PermutationProgram
                     WriteLine(writer);
                 }
             }
-        }
+        }*/
 
         static void WriteVector(StreamWriter writer, int[] vector)
         {
@@ -146,6 +154,11 @@ namespace PermutationProgram
             Write(writer, Parsing.CycleToString(permutation));
         }
 
+        static void WriteTransposition(StreamWriter writer, int[][] permutation)
+        {
+            Write(writer, Parsing.CycleToTransposition(permutation));
+        }
+
         static void WriteMatrix(StreamWriter writer, int[,] matrix)
         {
             Write(writer, "   ");
@@ -173,17 +186,17 @@ namespace PermutationProgram
             }
         }
 
-        static public void WriteInversions(StreamWriter writer, int[,] inversions)
+        static public void WriteInversions(StreamWriter writer, int[][] inversions)
         {
-            for (int i = 0; i < inversions.GetLength(0); i++)
-                WriteLine(writer, "(" + inversions[i, 0] + "," + inversions[i, 1] + ")");
+            for (int i = 0; i < inversions.Length; i++)
+                WriteLine(writer, "(" + inversions[i][0] + "," + inversions[i][1] + ")");
         }
 
         static public void WriteReverse(int[] permutation)
         {
             int[] reversePermutation = WithoutRepetition.ReversePermutation(permutation);
-            int[][] cycleReversePermutation = WithoutRepetition.VectorToCycle(reversePermutation);
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cycleReversePermutation = WithoutRepetition.PermutationToCycle(reversePermutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -209,10 +222,10 @@ namespace PermutationProgram
 
         static public void WriteComposition(int[] leftPermutation, int[] rightPermutation)
         {
-            int[] resultPermutation = WithoutRepetition.CompositionPermutation(leftPermutation, rightPermutation);
-            int[][] resultPermutationCycle = WithoutRepetition.VectorToCycle(resultPermutation);
-            int[][] leftPermutationCycle = WithoutRepetition.VectorToCycle(leftPermutation);
-            int[][] rightPermutationCycle = WithoutRepetition.VectorToCycle(rightPermutation);
+            int[] resultPermutation = WithoutRepetition.CompositionOfPermutation(leftPermutation, rightPermutation);
+            int[][] resultPermutationCycle = WithoutRepetition.PermutationToCycle(resultPermutation);
+            int[][] leftPermutationCycle = WithoutRepetition.PermutationToCycle(leftPermutation);
+            int[][] rightPermutationCycle = WithoutRepetition.PermutationToCycle(rightPermutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -246,8 +259,8 @@ namespace PermutationProgram
 
         static public void WriteNotations(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            int[,] matrixPermutation = WithoutRepetition.VectorToMatrix(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[,] matrixPermutation = WithoutRepetition.PermutationToMatrix(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -270,7 +283,7 @@ namespace PermutationProgram
 
         static public void WriteOrder(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -290,7 +303,7 @@ namespace PermutationProgram
 
         static public void WriteType(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             int[] vectorType = WithoutRepetition.TypeOfPermutation(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
@@ -318,7 +331,7 @@ namespace PermutationProgram
 
         static public void WriteIsInvolution(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -342,7 +355,7 @@ namespace PermutationProgram
 
         static public void WriteIsDisorder(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -356,7 +369,7 @@ namespace PermutationProgram
                 WriteLine(writer);
                 WriteLine(writer);
                 Write(writer, "Is a disorder? - ");
-                if (WithoutRepetition.IsDisorder(permutation))
+                if (WithoutRepetition.IsDeregement(permutation))
                     Write(writer, "yes");
                 else
                     Write(writer, "no");
@@ -366,7 +379,7 @@ namespace PermutationProgram
 
         static public void WriteIsEven(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -390,7 +403,7 @@ namespace PermutationProgram
 
         static public void WriteIsNonEven(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -404,38 +417,17 @@ namespace PermutationProgram
                 WriteLine(writer);
                 WriteLine(writer);
                 Write(writer, "Is non even? - ");
-                if (WithoutRepetition.IsNonEven(permutation))
+                if (WithoutRepetition.IsOdd(permutation))
                     Write(writer, "yes");
                 else
                     Write(writer, "no");
                 WriteLine(writer);
             }
         }
-
-        static public void WriteSign(int[] permutation)
-        {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            using (StreamWriter writer = new StreamWriter("log.txt", true))
-            {
-                WriteDate(writer);
-                WriteLine(writer, "Sign of permutation");
-                WriteLine(writer);
-                Write(writer, "One-line notation: ");
-                WriteVector(writer, permutation);
-                WriteLine(writer);
-                Write(writer, "Canonical cycle notation: ");
-                WriteCycle(writer, cyclePermutation);
-                WriteLine(writer);
-                WriteLine(writer);
-                Write(writer, "Value of sign: ");
-                Write(writer, WithoutRepetition.SignOfPermutation(permutation) + "");
-                WriteLine(writer);
-            }
-        }
-
+        
         static public void WriteSign1(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -456,7 +448,7 @@ namespace PermutationProgram
 
         static public void WriteSign2(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -477,7 +469,7 @@ namespace PermutationProgram
 
         static public void WriteSign3(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -498,7 +490,7 @@ namespace PermutationProgram
 
         static public void WriteSign4(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -519,7 +511,7 @@ namespace PermutationProgram
 
         static public void WriteIsTransposition(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -543,9 +535,9 @@ namespace PermutationProgram
 
         static public void WritePower(int[] permutation, int power)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             int[] resultPermutation = WithoutRepetition.PowerOfPermutation(permutation, power);
-            int[][] resultCyclePermutation = WithoutRepetition.VectorToCycle(resultPermutation);
+            int[][] resultCyclePermutation = WithoutRepetition.PermutationToCycle(resultPermutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -573,7 +565,7 @@ namespace PermutationProgram
 
         static public void WriteIsOneCycle(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -597,7 +589,7 @@ namespace PermutationProgram
 
         static public void WriteInversionVector(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             int[] inversionVector = WithoutRepetition.InversionVector(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
@@ -619,7 +611,7 @@ namespace PermutationProgram
 
         static public void WriteCountCycles(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -632,14 +624,14 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of cycles: "+WithoutRepetition.CountCycles(permutation));
+                Write(writer, "Number of cycles: "+WithoutRepetition.AllCyclesCount(permutation));
                 WriteLine(writer);
             }
         }
 
         static public void WriteCountEvenCycles(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -652,14 +644,14 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of even cycles: " + WithoutRepetition.CountEvenCycles(permutation));
+                Write(writer, "Number of even cycles: " + WithoutRepetition.EvenCyclesCount(permutation));
                 WriteLine(writer);
             }
         }
 
         static public void WriteCountNonEvenCycles(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -672,14 +664,14 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of non even cycles: " + WithoutRepetition.CountNonEvenCycles(permutation));
+                Write(writer, "Number of non even cycles: " + WithoutRepetition.OddCyclesCount(permutation));
                 WriteLine(writer);
             }
         }
 
         static public void WriteCountFixedPoints(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -692,11 +684,11 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of fixed points " + WithoutRepetition.CountFixedPoints(permutation));
+                Write(writer, "Number of fixed points " + WithoutRepetition.FixedPointsCount(permutation));
                 WriteLine(writer);
             }
         }
-
+        /*
         static public void WriteCountDisorders(int[] permutation)
         {
             int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
@@ -712,14 +704,14 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of disorders " + WithoutRepetition.CountDisorders(permutation));
+                Write(writer, "Number of disorders " + WithoutRepetition.CountDeregements(permutation));
                 WriteLine(writer);
             }
-        }
+        }*/
 
         static public void WriteCountInversions(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -732,15 +724,15 @@ namespace PermutationProgram
                 WriteCycle(writer, cyclePermutation);
                 WriteLine(writer);
                 WriteLine(writer);
-                Write(writer, "Number of inversions " + WithoutRepetition.CountInversions(permutation));
+                Write(writer, "Number of inversions " + WithoutRepetition.InversionsCount(permutation));
                 WriteLine(writer);
             }
         }
 
         static public void WriteInversionCommand(int[] permutation)
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            int[,] matrixOfInversions = WithoutRepetition.MatrixOfInversions(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[][] listOfInversions = WithoutRepetition.ListOfInversions(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -755,15 +747,15 @@ namespace PermutationProgram
                 WriteLine(writer);
                 WriteLine(writer, "Writing inversions");
                 WriteLine(writer);
-                WriteInversions(writer, matrixOfInversions);
+                WriteInversions(writer, listOfInversions);
                 WriteLine(writer);
             }
         }
 
         static public void WritePermutationIndexLO(int[] permutation) // LO- lexicographical order
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            long index = WithoutRepetition.PermutationIndexLO(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            long index = WithoutRepetition.PermutationIndexInLexOrder(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -783,8 +775,8 @@ namespace PermutationProgram
 
         static public void WritePermutationIndexALO(int[] permutation) // ALO- anti lexicographical order
         {
-            int[][] cyclePermutation = WithoutRepetition.VectorToCycle(permutation);
-            long index = WithoutRepetition.PermutationIndexALO(permutation);
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            long index = WithoutRepetition.PermutationIndexInAntiLexOrder(permutation);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -804,7 +796,7 @@ namespace PermutationProgram
 
         static public void WritePermutationFromIndexLO(int number, int n) //LO - lexicographical order
         {
-            int[] permutation = WithoutRepetition.PermutationFromIndexLO(number, n);
+            int[] permutation = WithoutRepetition.PermutationFromLexOrderIndex(number, n);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -821,7 +813,7 @@ namespace PermutationProgram
 
         static public void WritePermutationFromIndexALO(int number, int n) //ALO - anti lexicographical order
         {
-            int[] permutation = WithoutRepetition.PermutationFromIndexALO(number, n);
+            int[] permutation = WithoutRepetition.PermutationFromAntiLexOrderIndex(number, n);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
@@ -858,7 +850,7 @@ namespace PermutationProgram
                 WriteDate(writer);
                 WriteLine(writer, "Generating permutations for type: " + type);
                 WriteLine(writer);
-                int[][] permutations = WithoutRepetition.GeneratePermutationsOfType(vectorType);
+                int[][] permutations = WithoutRepetition.AllPermutationsOfGivenType(vectorType);
                 int counter = 1;
                 foreach(int[] permutation in permutations)
                 {
@@ -879,7 +871,7 @@ namespace PermutationProgram
                 WriteDate(writer);
                 WriteLine(writer, "Generating permutations for order: " + order + " and length: " + length);
                 WriteLine(writer);
-                int[][] permutations = WithoutRepetition.GenerateWithOrder(order, length);
+                int[][] permutations = WithoutRepetition.AllPermutationsOfGivenOrder(order, length);
                 int counter = 1;
                 foreach (int[] permutation in permutations)
                 {
@@ -892,8 +884,87 @@ namespace PermutationProgram
             }
         }
 
+        static public void WriteCompositionOfTranposition1(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[][] transpositions = WithoutRepetition.PermutationToCompositionOfTranpositions1(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteCycle(writer, cyclePermutation);
+                Write(writer, "=");
+                for(int i=0;i<transpositions.Length-1;i++)
+                {
+                    int[][] cycleTransposition = WithoutRepetition.PermutationToCycle(transpositions[i]);
+                    WriteTransposition(writer, cycleTransposition);
+                    Write(writer, "*");
+                }
+                int[][] cycleTranspositionLast = WithoutRepetition.PermutationToCycle(transpositions[transpositions.Length - 1]);
+                WriteTransposition(writer, cycleTranspositionLast);
+                WriteLine(writer); WriteLine(writer);
+            }
 
+        }
+        static public void WriteCompositionOfTranposition2(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[][] transpositions = WithoutRepetition.PermutationToCompositionOfTranpositions2(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteCycle(writer, cyclePermutation);
+                Write(writer, "=");
+                for (int i = 0; i < transpositions.Length - 1; i++)
+                {
+                    int[][] cycleTransposition = WithoutRepetition.PermutationToCycle(transpositions[i]);
+                    WriteTransposition(writer, cycleTransposition);
+                    Write(writer, "*");
+                }
+                int[][] cycleTranspositionLast = WithoutRepetition.PermutationToCycle(transpositions[transpositions.Length - 1]);
+                WriteTransposition(writer, cycleTranspositionLast);
+                WriteLine(writer); WriteLine(writer);
+            }
 
+        }
+
+        static public void WriteCompositionOfNeighbouringTranposition1(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[][] transpositions = WithoutRepetition.PermutationToNeighbouringTransposition1(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteCycle(writer, cyclePermutation);
+                Write(writer, "=");
+                for (int i = 0; i < transpositions.Length - 1; i++)
+                {
+                    int[][] cycleTransposition = WithoutRepetition.PermutationToCycle(transpositions[i]);
+                    WriteTransposition(writer, cycleTransposition);
+                    Write(writer, "*");
+                }
+                int[][] cycleTranspositionLast = WithoutRepetition.PermutationToCycle(transpositions[transpositions.Length - 1]);
+                WriteTransposition(writer, cycleTranspositionLast);
+                WriteLine(writer); WriteLine(writer);
+            }
+
+        }
+        static public void WriteCompositionOfNeighbouringTranposition2(int[] permutation)
+        {
+            int[][] cyclePermutation = WithoutRepetition.PermutationToCycle(permutation);
+            int[][] transpositions = WithoutRepetition.PermutationToNeighbouringTransposition1(permutation);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteCycle(writer, cyclePermutation);
+                Write(writer, "=");
+                for (int i = 0; i < transpositions.Length - 1; i++)
+                {
+                    int[][] cycleTransposition = WithoutRepetition.PermutationToCycle(transpositions[i]);
+                    WriteTransposition(writer, cycleTransposition);
+                    Write(writer, "*");
+                }
+                int[][] cycleTranspositionLast = WithoutRepetition.PermutationToCycle(transpositions[transpositions.Length - 1]);
+                WriteTransposition(writer, cycleTranspositionLast);
+                WriteLine(writer); WriteLine(writer);
+            }
+
+        }
         static void WriteDate(StreamWriter writer)
         {
             writer.WriteLine();
@@ -908,7 +979,7 @@ namespace PermutationProgram
             {
                 WriteDate(writer);
                 WriteLine(writer, "Generating permutations...");
-                int[][] permutations = WithoutRepetition.PermutationAntylexicographical(numberInt);
+                int[][] permutations = WithoutRepetition.AllPermutationsInAntiLexOrder(numberInt);
                 for (int i = 0; i < permutations.Length; i++)
                 {
                     Write(writer, (i + 1) + ") ");
@@ -920,11 +991,21 @@ namespace PermutationProgram
 
         static public void IsGroup(int[][] permutations)
         {
-            bool isGroup = WithoutRepetition.IsGroup(permutations);
+            bool isGroup = WithoutRepetition.IsPermutationGroup(permutations);
             using (StreamWriter writer = new StreamWriter("log.txt", true))
             {
                 WriteDate(writer);
                 WriteLine(writer, "Is permutations are a group?- " + isGroup);
+            }
+        }
+
+        static public void IsGroupProve(int[][] permutations)
+        {
+            string prove = WithoutRepetition.PermutationGroupFacts(permutations);
+            using (StreamWriter writer = new StreamWriter("log.txt", true))
+            {
+                WriteDate(writer);
+                WriteLine(writer, prove);
             }
         }
     }
