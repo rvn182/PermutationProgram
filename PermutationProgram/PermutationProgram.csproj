@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayFunctions.cs" />
     <Compile Include="Functions.cs" />
+    <Compile Include="HelpFunctions.cs" />
+    <Compile Include="MathFunctions.cs" />
     <Compile Include="Writing.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Program.cs" />

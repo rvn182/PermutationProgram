@@ -108,10 +108,10 @@ namespace PermutationProgram
                 case "generate":
                     Writing.GeneratePermutations(words[1]);
                     break;
-                    /*
-                case "generate-me":
-                    Writing.GeneratePermutationsME(words[1]);
-                    break;*/
+                    
+                case "generate-random":
+                    Writing.WriteGenerateRandom(int.Parse(words[1]));
+                    break;
                 case "reverse":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteReverse(permutation);
@@ -132,17 +132,17 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteIsInvolution(permutation);
                     break;
-                case "is-disorder":
+                case "is-deregement":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteIsDisorder(permutation);
+                    Writing.WriteIsDeregement(permutation);
                     break;
                 case "is-even":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteIsEven(permutation);
                     break;
-                case "is-non-even":
+                case "is-odd":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteIsNonEven(permutation);
+                    Writing.WriteIsOdd(permutation);
                     break;
                 case "sign1":
                     permutation = Parsing.ParsePermutation(words[1]);
@@ -180,21 +180,17 @@ namespace PermutationProgram
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountEvenCycles(permutation);
                     break;
-                case "count-non-even-cycles":
+                case "count-odd-cycles":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteCountNonEvenCycles(permutation);
+                    Writing.WriteCountOddCycles(permutation);
                     break;
                 case "count-fixed-points":
                     permutation = Parsing.ParsePermutation(words[1]);
                     Writing.WriteCountFixedPoints(permutation);
-                    break;/*
-                case "count-disorders":
-                    permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteCountDisorders(permutation);
-                    break;*/
+                    break;
                 case "count-inversions":
                     permutation = Parsing.ParsePermutation(words[1]);
-                    Writing.WriteCountFixedPoints(permutation);
+                    Writing.WriteCountInversions(permutation);
                     break;
                 case "inversions":
                     permutation = Parsing.ParsePermutation(words[1]);

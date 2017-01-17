@@ -129,7 +129,7 @@ namespace PermutationProgram
                 }
             }
             int[] returnedPermutation = values.ToArray();
-            if (!WithoutRepetition.CheckOnePermutation(returnedPermutation)) throw new Exception("Bad format of permutation");
+            if (!HelpFunctions.checkOnePermutation(returnedPermutation)) throw new Exception("Bad format of permutation");
 
 
             return returnedPermutation;
@@ -237,7 +237,7 @@ namespace PermutationProgram
                     indexBool++;
                 }
 
-            if (!WithoutRepetition.CheckCyclePermutation(returnedArray)) throw new Exception("Bad format of permutation.");
+            if (!HelpFunctions.checkCyclePermutation(returnedArray)) throw new Exception("Bad format of permutation.");
 
             return returnedArray;
         }
@@ -563,7 +563,7 @@ namespace PermutationProgram
                 int[] permutationToRoot = ParsePermutation(rightOfExpression);
                 int[][] Cases = WithoutRepetition.RootOfPermutation(permutationToRoot, root);
                 if (Cases.Length == 0)
-                    toReturn += "There isn't any solutions of expression.";
+                    toReturn += "There aren't any solutions.";
                 else
                 {
                     int[][] permutationCycle = WithoutRepetition.PermutationToCycle(Cases[0]);
